@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Sora', sans-serif !important;
+    background-color: #f4f4f4;
+}
+
+/* Personalización del header */
+.navbar {
+    background-color: #ffffff !important;
+    border-bottom: 2px solid #00bcd4 !important;
+}
+
+.navbar .nav-link {
+    color: #333333 !important;
+}
+
+.navbar .nav-link:hover {
+    color: #00bcd4 !important;
+}
+
+/* Ajuste de la tabla */
+.table-responsive {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+}
+
+table {
+    font-size: 1rem; /* Aumentamos el tamaño de la fuente */
+    width: 100%;
+}
+
+/* Encabezados más visibles */
+th {
+    font-size: 0.9rem; /* Aumentamos el tamaño de los encabezados */
+    background-color: #ffffff !important;
+    color: #00bcd4 !important;
+    text-align: center;
+    padding: 8px 12px; /* Aumentamos el padding */
+}
+
+/* Celdas de la tabla */
+th, td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 8px 12px; /* Aumentamos el padding */
+    font-size: 0.9rem; /* Aumentamos el tamaño del texto */
+}
+
+/* Ajuste para que las imágenes no se desborden */
+td img {
+    max-width: 50px;
+    height: auto;
+}
+
+/* Estilo para los botones */
+.btn {
+    font-size: 0.85rem; 
+    padding: 6px 12px;
+}
+/* Estilo para la celda de Resumen */
+table tbody td:nth-child(6) { /* Asumiendo que 'Resumen' es la sexta columna */
+    max-width: 200px; /* Limitar el ancho de la celda */
+    white-space: nowrap; /* Evitar que el texto se rompa */
+    overflow: hidden; /* Cortar el texto que se desborda */
+    text-overflow: ellipsis; /* Mostrar '...' cuando el texto se corta */
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    padding: 4px 8px; /* Ajustar el padding si es necesario */
+}
+/* Estilo para el botón Editar */
+.btn-primary {
+    background-color: #00bcd4 !important; /* Color azul celeste */
+    border-color: #00bcd4 !important; /* Asegura que el borde también sea del mismo color */
+}
+
+.btn-primary:hover {
+    background-color: #0097a7 !important; /* Un tono más oscuro al pasar el ratón */
+    border-color: #0097a7 !important;
+}
+
+/* Cambiar color del icono de lupa en la barra de búsqueda */
+.btn-outline-success i.fas.fa-search {
+    color: #00bcd4 !important; /* Color azul celeste */
+}
+/* Cambiar el color del botón predeterminado a azul celeste */
+.btn-outline-success {
+    color: #00bcd4 !important; /* Texto en azul celeste */
+    border-color: #00bcd4 !important; /* Borde en azul celeste */
+}
+
+/* Cambiar color del icono de lupa en el botón predeterminado */
+.btn-outline-success i.fas.fa-search {
+    color: #00bcd4 !important; /* Lupa en azul celeste */
+}
+
+/* Cambiar color del botón en estado hover a azul celeste */
+.btn-outline-success:hover {
+    color: #ffffff !important; /* Cambiar texto a blanco */
+    background-color: #00bcd4 !important; /* Azul celeste de fondo */
+    border-color: #00bcd4 !important; /* Azul celeste para el borde */
+}
+
+/* Cambiar color del icono de lupa cuando el botón está en hover */
+.btn-outline-success:hover i.fas.fa-search {
+    color: #ffffff !important; /* Cambiar el color del icono a blanco */
+}
+/* Estilo para el input de búsqueda */
+.form-control {
+    transition: background-color 0.5s ease, border-color 0.5s ease !important; /* Suaviza tanto el cambio de color de fondo como de borde */
+}
+
+/* Efecto cuando pasas el ratón sobre el input */
+.form-control:hover {
+    background-color: #e0e0e0 !important; /* Color gris claro al pasar el ratón */
+}
+
+/* Estilo cuando el input está enfocado (clic) */
+.form-control:focus {
+    border-color: #00bcd4 !important; /* Bordes azules celestes al hacer clic */
+    box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25) !important; /* Sombra sutil con el mismo azul celeste */
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 0.8rem; /* Aumentamos el tamaño del texto en dispositivos pequeños */
+        max-width: 100px;
+        padding: 6px 8px;
+    }
+
+    td img {
+        width: 35px;
+    }
+
+    .btn {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+}
