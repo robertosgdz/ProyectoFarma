@@ -7,7 +7,6 @@ require_once("menu.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lista de Productos</title>
-    <!-- Agregar icono de lupa de Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="m-0 p-0">
@@ -15,13 +14,14 @@ require_once("menu.php");
 <!-- Barra de búsqueda -->
 <div class="container my-4">
     <form class="d-flex" action="" method="GET">
-        <!-- Selector para elegir entre Producto o Marca -->
+        <!-- Selector para elegir entre Producto, Marca o Categoría -->
         <select class="form-control me-2" name="search_type">
             <option value="producto" <?= isset($_GET['search_type']) && $_GET['search_type'] == 'producto' ? 'selected' : '' ?>>Buscar por Producto</option>
             <option value="marca" <?= isset($_GET['search_type']) && $_GET['search_type'] == 'marca' ? 'selected' : '' ?>>Buscar por Marca</option>
+            <option value="categoria" <?= isset($_GET['search_type']) && $_GET['search_type'] == 'categoria' ? 'selected' : '' ?>>Buscar por Categoría</option>
         </select>
         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="search">
-        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i> Buscar</button> <!-- Icono de lupa de Bootstrap -->
+        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i> Buscar</button>
     </form>
 </div>
 
@@ -48,19 +48,22 @@ require_once("menu.php");
     </thead>
     <tbody>
         <?php
-        // Si hay búsqueda, filtrar los productos
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $searchTerm = strtolower($_GET['search']);
-            $searchType = isset($_GET['search_type']) ? $_GET['search_type'] : 'producto';
+            $searchType = $_GET['search_type'] ?? 'producto';
 
-            // Filtrar por producto o marca según lo seleccionado
             $productos = array_filter($productos, function($item) use ($searchTerm, $searchType) {
-                if ($searchType == 'producto') {
-                    return strpos(strtolower($item['Nombre']), $searchTerm) !== false;
-                } elseif ($searchType == 'marca') {
-                    return strpos(strtolower($item['IDMarca']), $searchTerm) !== false;
+                switch ($searchType) {
+                    case 'producto':
+                        return stripos($item['Nombre'], $searchTerm) !== false;
+                    case 'marca':
+                        return stripos($item['IDMarca'], $searchTerm) !== false;
+                    case 'categoria':
+                        $categorias = array_map('trim', explode(',', $item['IDCategoria']));
+                        return in_array($searchTerm, $categorias);
+                    default:
+                        return false;
                 }
-                return false;
             });
         }
 
