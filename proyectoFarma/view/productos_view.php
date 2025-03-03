@@ -1,6 +1,7 @@
 <?php
 require_once("menu.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +15,6 @@ require_once("menu.php");
 <!-- Barra de búsqueda -->
 <div class="container my-4">
     <form class="d-flex" action="" method="GET">
-        <!-- Selector para elegir entre Producto, Marca o Categoría -->
         <select class="form-control me-2" name="search_type">
             <option value="producto" <?= isset($_GET['search_type']) && $_GET['search_type'] == 'producto' ? 'selected' : '' ?>>Buscar por Producto</option>
             <option value="marca" <?= isset($_GET['search_type']) && $_GET['search_type'] == 'marca' ? 'selected' : '' ?>>Buscar por Marca</option>
@@ -39,59 +39,75 @@ require_once("menu.php");
             <th>Precio Con Impuestos</th>
             <th>Precio Mayorista</th>
             <th>IDFiscal</th>
-            <th>IDCategoria</th>
+            <th>Categoría</th>
             <th>IDMarca</th>
             <th>Peso</th>
             <th>Imagen</th>
-            <th>Acciones</th>
+            <?php if (isset($_SESSION['nombre'])): ?>
+                <th>Acciones</th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tbody>
-        <?php
-        if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $searchTerm = strtolower($_GET['search']);
-            $searchType = $_GET['search_type'] ?? 'producto';
+    <?php
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $searchTerm = strtolower($_GET['search']);
+    $searchType = $_GET['search_type'] ?? 'producto';
 
-            $productos = array_filter($productos, function($item) use ($searchTerm, $searchType) {
-                switch ($searchType) {
-                    case 'producto':
-                        return stripos($item['Nombre'], $searchTerm) !== false;
-                    case 'marca':
-                        return stripos($item['IDMarca'], $searchTerm) !== false;
-                    case 'categoria':
-                        $categorias = array_map('trim', explode(',', $item['IDCategoria']));
-                        return in_array($searchTerm, $categorias);
-                    default:
-                        return false;
-                }
-            });
+    // Filtrar los productos en base al tipo de búsqueda
+    $productos = array_filter($productos, function($item) use ($searchTerm, $searchType) {
+        switch ($searchType) {
+            case 'producto':
+                return (stripos($item['Nombre'], $searchTerm) !== false) || (strtolower($item['IDProducto']) == $searchTerm);
+            case 'marca':
+                return (stripos($item['NombreMarca'], $searchTerm) !== false) || (strtolower($item['IDMarca']) == $searchTerm);
+            case 'categoria':
+                $categorias = array_map('trim', explode(',', $item['IDCategoria']));
+                return (stripos($item['categorias'], $searchTerm) !== false) || in_array($searchTerm, $categorias);
+            default:
+                return false;
         }
+    });
+}
 
-        foreach ($productos as $item) : ?>
-            <tr>
-                <td><?= htmlspecialchars($item['IDProducto']) ?></td>
-                <td><?= htmlspecialchars($item['Referencia']) ?></td>
-                <td><?= htmlspecialchars($item['Nombre']) ?></td>
-                <td><a href="<?= htmlspecialchars($item['Enlace']) ?>" target="_blank">Ver Producto</a></td>
-                <td><?= htmlspecialchars($item['EAN13']) ?></td>
-                <td><?= htmlspecialchars($item['Resumen']) ?></td>
-                <td><?= number_format($item['PrecioSinImpuestos'], 2) ?> €</td>
-                <td><?= number_format($item['PrecioConImpuestos'], 2) ?> €</td>
-                <td><?= number_format($item['PrecioMayorista'], 2) ?> €</td>
-                <td><?= htmlspecialchars($item['IDFiscal']) ?></td>
-                <td><?= htmlspecialchars($item['IDCategoria']) ?></td>
-                <td><?= htmlspecialchars($item['IDMarca']) ?></td>
-                <td><?= htmlspecialchars($item['Peso']) ?> kg</td>
-                <td><img src="<?= htmlspecialchars($item['URLImagen']) ?>" alt="Imagen del producto" width="50"></td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Editar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+foreach ($productos as $item) : ?>
+    <tr>
+        <td><?= htmlspecialchars($item['IDProducto']) ?></td>
+        <td><?= htmlspecialchars($item['Referencia']) ?></td>
+        <td><?= htmlspecialchars($item['Nombre']) ?></td>
+        <td><a href="<?= htmlspecialchars($item['Enlace']) ?>" target="_blank">Ver Producto</a></td>
+        <td><?= htmlspecialchars($item['EAN13']) ?></td>
+        <td><?= htmlspecialchars($item['Resumen']) ?></td>
+        <td><?= number_format($item['PrecioSinImpuestos'], 2) ?> €</td>
+        <td><?= number_format($item['PrecioConImpuestos'], 2) ?> €</td>
+        <td><?= number_format($item['PrecioMayorista'], 2) ?> €</td>
+        <td><?= htmlspecialchars($item['IDFiscal']) ?></td>
+        <td><?= htmlspecialchars($item['categorias']) ?></td>
+        <td><?= htmlspecialchars($item['IDMarca']) ?></td>
+        <td><?= htmlspecialchars($item['Peso']) ?> kg</td>
+        <td><img src="<?= htmlspecialchars($item['URLImagen']) ?>" alt="Imagen del producto" width="50"></td>
+        <?php if (isset($_SESSION['nombre'])): ?>
+            <td>
+                <a href="editar.php?IDProducto=<?= htmlspecialchars($item['IDProducto']) ?>" class="btn btn-primary btn-sm">Editar</a>
+                <form action="index.php" method="POST" style="display: inline;">
+                    <input type="hidden" name="action" value="eliminar">
+                    <input type="hidden" name="IDProducto" value="<?= htmlspecialchars($item['IDProducto']) ?>">
+                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                </form>
+            </td>
+        <?php endif; ?>
+    </tr>
+<?php endforeach; ?>
     </tbody>
 </table>
 </div>
+
+<?php if (isset($_SESSION['message'])): ?>
+    <div class="alert alert-info">
+        <?= $_SESSION['message']; ?>
+    </div>
+    <?php unset($_SESSION['message']); ?>
+<?php endif; ?>
 
 </body>
 </html>
