@@ -9,8 +9,10 @@ body {
 .navbar {
     background-color: #ffffff !important;
     border-bottom: 2px solid #00bcd4 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
-
 .navbar .nav-link {
     color: #333333 !important;
 }
@@ -21,9 +23,18 @@ body {
 
 /* Ajuste de la tabla */
 .table-responsive {
-    overflow-x: auto;
-    display: block;
-    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Añade margen interior */
+    overflow-x: auto; /* Activa la barra de desplazamiento horizontal */
+    max-width: 90vw; /* Limita el ancho máximo */
+    white-space: nowrap; /* Evita que el contenido de las celdas se divida en varias líneas */
+    border: 1px solid #00bcd4; /* Opcional: Añade un borde alrededor de la tabla */
+}
+
+/* Asegurar que la tabla no desborde */
+table {
+    min-width: 1200px; /* Ajusta este valor según el contenido */
 }
 
 table {
@@ -122,21 +133,64 @@ table tbody td:nth-child(6) { /* Asumiendo que 'Resumen' es la sexta columna */
     box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25) !important; /* Sombra sutil con el mismo azul celeste */
 }
 
-
-/* Responsividad */
+/* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
+    /* Ajustes para la tabla */
+    .table-responsive {
+        padding: 10px; /* Reducir el padding para pantallas pequeñas */
+        max-width: 100%; /* Hacer que la tabla ocupe el 100% del ancho */
+        overflow-x: auto; /* Activar desplazamiento horizontal si es necesario */
+    }
+
+    table {
+        font-size: 0.8rem; /* Reducir tamaño de la fuente */
+        width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+    }
+
     th, td {
-        font-size: 0.8rem; /* Aumentamos el tamaño del texto en dispositivos pequeños */
-        max-width: 100px;
-        padding: 6px 8px;
+        font-size: 0.8rem; /* Reducir tamaño de texto en celdas */
+        padding: 6px 8px; /* Reducir el padding */
     }
 
     td img {
-        width: 35px;
+        width: 35px; /* Reducir el tamaño de las imágenes */
     }
 
     .btn {
-        font-size: 0.75rem;
+        font-size: 0.75rem; /* Reducir el tamaño de los botones */
         padding: 6px 10px;
+    }
+
+    /* Ajustar los formularios y botones */
+    .form-control {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
+
+/* Responsividad para pantallas más grandes como tablets e iPads */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .table-responsive {
+        max-width: 90%; /* Limitar el ancho de la tabla */
+    }
+
+    .btn {
+        font-size: 0.8rem; /* Ajustar el tamaño de los botones */
+        padding: 8px 14px;
+    }
+
+    th, td {
+        font-size: 0.85rem; /* Ajustar el tamaño de las celdas */
+        padding: 6px 10px;
+    }
+
+    td img {
+        width: 45px; /* Ajustar el tamaño de las imágenes */
+    }
+
+    /* Ajustes de formularios */
+    .form-control {
+        font-size: 15px;
+        padding: 10px;
     }
 }
