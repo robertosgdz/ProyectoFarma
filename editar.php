@@ -1,4 +1,5 @@
 <?php
+require_once("menu.php");
 require_once("model/productos_model.php");
 
 if (!isset($_GET['IDProducto']) || !is_numeric($_GET['IDProducto'])) {
@@ -11,6 +12,8 @@ $producto = $productoModel->get_producto($_GET['IDProducto']);
 if (!$producto) {
     die("Producto no encontrado.");
 }
+
+$mensaje = '';  // Variable para el mensaje a mostrar
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $datosActualizados = [
@@ -29,13 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     if ($productoModel->actualizar_producto($_GET['IDProducto'], $datosActualizados)) {
-        echo "<script>alert('Producto actualizado correctamente'); window.location.href='index.php';</script>";
+        $mensaje = "Producto actualizado correctamente";
+        $tipoMensaje = "success";
+        echo "<script>setTimeout(function(){ window.location.href='index.php'; }, 1000);</script>";  // Redirige después de 1 segundo
     } else {
-        echo "<script>alert('Error al actualizar el producto');</script>";
+        $mensaje = "Error al actualizar el producto";
+        $tipoMensaje = "danger";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,8 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Editar Producto</title>
     <link rel="stylesheet" href="css/editarCss.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-<body>
+<body class="m-0 p-0">
+    <br>
     <h2>Editar Producto</h2>
     <form method="POST">
         <label>Referencia:</label>
@@ -86,5 +95,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit">Guardar Cambios</button>
         <a href="index.php">Cancelar</a>
     </form>
+
+    <!-- Notificación -->
+    <?php if ($mensaje): ?>
+        <div class="notification <?= $tipoMensaje ?>">
+            <?= $mensaje ?>
+        </div>
+    <?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mostrar la notificación
+        const notification = document.querySelector('.notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);  // Se desvanece después de 3 segundos
+        }
+    </script>
 </body>
 </html>

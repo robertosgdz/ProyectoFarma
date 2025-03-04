@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function home()
 {
     require_once("model/productos_model.php");
