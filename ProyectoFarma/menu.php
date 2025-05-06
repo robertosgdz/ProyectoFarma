@@ -31,7 +31,7 @@
                 <li class="nav-item me-0 me-lg-5">
                     <a href="#" class="nav-link d-flex flex-column align-items-center">
                         <i class="bi bi-plus-circle fs-2 mb-2"></i>
-                        <span class="d-none d-sm-block">Insertar</span>
+                        <span class="d-none d-sm-block">Insertar producto</span>
                     </a>
                 </li>
                 <li class="nav-item me-0 me-lg-5">

@@ -87,15 +87,20 @@ foreach ($productos as $item) : ?>
         <td><?= htmlspecialchars($item['Peso']) ?> kg</td>
         <td><img src="<?= htmlspecialchars($item['URLImagen']) ?>" alt="Imagen del producto" width="50"></td>
         <?php if (isset($_SESSION['nombre'])): ?>
-            <td>
-                <a href="editar.php?IDProducto=<?= htmlspecialchars($item['IDProducto']) ?>" class="btn btn-primary btn-sm">Editar</a>
-                <form action="index.php" method="POST" style="display: inline;">
-                    <input type="hidden" name="action" value="eliminar">
-                    <input type="hidden" name="IDProducto" value="<?= htmlspecialchars($item['IDProducto']) ?>">
-                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
-                </form>
-            </td>
-        <?php endif; ?>
+    <td>
+        <a href="editar.php?IDProducto=<?= htmlspecialchars($item['IDProducto']) ?>" class="btn btn-sm btn-warning" title="Editar">
+            <i class="bi bi-pencil-square"></i>
+        </a>
+        <form action="index.php" method="POST" style="display: inline;">
+            <input type="hidden" name="action" value="eliminar">
+            <input type="hidden" name="IDProducto" value="<?= htmlspecialchars($item['IDProducto']) ?>">
+            <button class="btn btn-sm btn-danger" type="submit" title="Eliminar">
+                <i class="bi bi-trash"></i>
+            </button>
+        </form>
+    </td>
+<?php endif; ?>
+
     </tr>
 <?php endforeach; ?>
     </tbody>
