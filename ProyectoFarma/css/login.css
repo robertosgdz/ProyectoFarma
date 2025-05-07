@@ -1,0 +1,86 @@
+/* Contenedor para centrar el formulario */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    padding: 20px;
+}
+
+/* Contenedor del formulario */
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Campos del formulario */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+/* Botón de login estilo Bootstrap */
+.login-button {
+    width: 100%;
+    background-color: #00bcd4;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out, transform 0.1s;
+}
+
+.login-button:hover {
+    background-color: #00e1ff;
+}
+
+.login-button:active {
+    transform: scale(0.98);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-text {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+}
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #40CDDF;
+}

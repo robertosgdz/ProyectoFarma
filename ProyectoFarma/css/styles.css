@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Sora', sans-serif !important;
+    background-color: #f4f4f4;
+}
+
+/* Personalización del header */
+.navbar {
+    background-color: #ffffff !important;
+    border-bottom: 2px solid #00bcd4 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.navbar .nav-link {
+    color: #333333 !important;
+}
+
+.navbar .nav-link:hover {
+    color: #00bcd4 !important;
+}
+
+/* Ajuste de la tabla */
+.table-responsive {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Añade margen interior */
+    overflow-x: auto; /* Activa la barra de desplazamiento horizontal */
+    max-width: 90vw; /* Limita el ancho máximo */
+    white-space: nowrap; /* Evita que el contenido de las celdas se divida en varias líneas */
+    border: 1px solid #00bcd4; /* Opcional: Añade un borde alrededor de la tabla */
+}
+
+/* Asegurar que la tabla no desborde */
+table {
+    min-width: 1200px; /* Ajusta este valor según el contenido */
+}
+
+table {
+    font-size: 1rem; /* Aumentamos el tamaño de la fuente */
+    width: 100%;
+}
+
+/* Encabezados más visibles */
+th {
+    font-size: 0.9rem; /* Aumentamos el tamaño de los encabezados */
+    background-color: #ffffff !important;
+    color: #00bcd4 !important;
+    text-align: center;
+    padding: 8px 12px; /* Aumentamos el padding */
+}
+
+/* Celdas de la tabla */
+th, td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 8px 12px; /* Aumentamos el padding */
+    font-size: 0.9rem; /* Aumentamos el tamaño del texto */
+}
+
+/* Ajuste para que las imágenes no se desborden */
+td img {
+    max-width: 50px;
+    height: auto;
+}
+
+/* Estilo para los botones */
+.btn {
+    font-size: 0.85rem; 
+    padding: 6px 12px;
+}
+/* Estilo para la celda de Resumen */
+table tbody td:nth-child(6) { /* Asumiendo que 'Resumen' es la sexta columna */
+    max-width: 200px; /* Limitar el ancho de la celda */
+    white-space: nowrap; /* Evitar que el texto se rompa */
+    overflow: hidden; /* Cortar el texto que se desborda */
+    text-overflow: ellipsis; /* Mostrar '...' cuando el texto se corta */
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    padding: 4px 8px; /* Ajustar el padding si es necesario */
+}
+/* Estilo para el botón Editar */
+.btn-primary {
+    background-color: #00bcd4 !important; /* Color azul celeste */
+    border-color: #00bcd4 !important; /* Asegura que el borde también sea del mismo color */
+}
+
+.btn-primary:hover {
+    background-color: #0097a7 !important; /* Un tono más oscuro al pasar el ratón */
+    border-color: #0097a7 !important;
+}
+
+/* Cambiar color del icono de lupa en la barra de búsqueda */
+.btn-outline-success i.fas.fa-search {
+    color: #00bcd4 !important; /* Color azul celeste */
+}
+/* Cambiar el color del botón predeterminado a azul celeste */
+.btn-outline-success {
+    color: #00bcd4 !important; /* Texto en azul celeste */
+    border-color: #00bcd4 !important; /* Borde en azul celeste */
+}
+
+/* Cambiar color del icono de lupa en el botón predeterminado */
+.btn-outline-success i.fas.fa-search {
+    color: #00bcd4 !important; /* Lupa en azul celeste */
+}
+
+/* Cambiar color del botón en estado hover a azul celeste */
+.btn-outline-success:hover {
+    color: #ffffff !important; /* Cambiar texto a blanco */
+    background-color: #00bcd4 !important; /* Azul celeste de fondo */
+    border-color: #00bcd4 !important; /* Azul celeste para el borde */
+}
+
+/* Cambiar color del icono de lupa cuando el botón está en hover */
+.btn-outline-success:hover i.fas.fa-search {
+    color: #ffffff !important; /* Cambiar el color del icono a blanco */
+}
+/* Estilo para el input de búsqueda */
+.form-control {
+    transition: background-color 0.5s ease, border-color 0.5s ease !important; /* Suaviza tanto el cambio de color de fondo como de borde */
+}
+
+/* Efecto cuando pasas el ratón sobre el input */
+.form-control:hover {
+    background-color: #e0e0e0 !important; /* Color gris claro al pasar el ratón */
+}
+
+/* Estilo cuando el input está enfocado (clic) */
+.form-control:focus {
+    border-color: #00bcd4 !important; /* Bordes azules celestes al hacer clic */
+    box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25) !important; /* Sombra sutil con el mismo azul celeste */
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Ajustes para la tabla */
+    .table-responsive {
+        padding: 10px; /* Reducir el padding para pantallas pequeñas */
+        max-width: 100%; /* Hacer que la tabla ocupe el 100% del ancho */
+        overflow-x: auto; /* Activar desplazamiento horizontal si es necesario */
+    }
+
+    table {
+        font-size: 0.8rem; /* Reducir tamaño de la fuente */
+        width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+    }
+
+    th, td {
+        font-size: 0.8rem; /* Reducir tamaño de texto en celdas */
+        padding: 6px 8px; /* Reducir el padding */
+    }
+
+    td img {
+        width: 35px; /* Reducir el tamaño de las imágenes */
+    }
+
+    .btn {
+        font-size: 0.75rem; /* Reducir el tamaño de los botones */
+        padding: 6px 10px;
+    }
+
+    /* Ajustar los formularios y botones */
+    .form-control {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
+
+/* Responsividad para pantallas más grandes como tablets e iPads */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .table-responsive {
+        max-width: 90%; /* Limitar el ancho de la tabla */
+    }
+
+    .btn {
+        font-size: 0.8rem; /* Ajustar el tamaño de los botones */
+        padding: 8px 14px;
+    }
+
+    th, td {
+        font-size: 0.85rem; /* Ajustar el tamaño de las celdas */
+        padding: 6px 10px;
+    }
+
+    td img {
+        width: 45px; /* Ajustar el tamaño de las imágenes */
+    }
+
+    /* Ajustes de formularios */
+    .form-control {
+        font-size: 15px;
+        padding: 10px;
+    }
+}
