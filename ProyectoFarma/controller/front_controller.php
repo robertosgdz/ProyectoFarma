@@ -7,7 +7,7 @@ function console_log( $data ){
 //La carpeta donde buscaremos los controladores
 define('CONTROLLERS_FOLDER',"controller/");
 //Si no se indica un controlador, este es el controlador que se usará por defecto
-define('DEFAULT_CONTROLLER',"productos");
+define('DEFAULT_CONTROLLER',"home");
 //Si no se indica una acción, esta acción es la que se usará por defecto
 define('DEFAULT_ACTION', "home");
 // Obtenemos el controlador por defecto. 

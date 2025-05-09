@@ -16,9 +16,14 @@ $titulo = $esEdicion ? "Editar Pedido #{$pedido['IDPedido']}" : "Nuevo Pedido";
 
     <form method="post" action="index.php?controlador=pedidos&action=<?= $action ?>">
         <div class="mb-3">
-            <label for="Estado" class="form-label">Estado</label>
-            <input type="text" class="form-control" id="Estado" name="Estado" required
-                   value="<?= $pedido['Estado'] ?? '' ?>">
+            <!-- Campo select para Estado -->
+            <label for="Estado">Estado</label>
+<select name="Estado" id="Estado" class="form-control" required>
+    <option value="En proceso" <?= (isset($pedido['Estado']) && $pedido['Estado'] === 'En proceso') ? 'selected' : '' ?>>En proceso</option>
+    <option value="Listo" <?= (isset($pedido['Estado']) && $pedido['Estado'] === 'Listo') ? 'selected' : '' ?>>Listo</option>
+</select>
+
+
         </div>
 
         <div class="mb-3">

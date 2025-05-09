@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2025 a las 16:11:49
+-- Tiempo de generación: 09-05-2025 a las 11:51:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -1112,9 +1112,12 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`IDPedido`, `Estado`, `ProductosFaltantes`, `Observaciones`, `Incidencias`, `Seguimiento`) VALUES
-(1, 'Listo', NULL, NULL, NULL, NULL),
-(2, 'En espera', NULL, NULL, NULL, NULL),
-(4, 'Listo', '', '', '', '');
+(1, 'Listo', '', '', '', ''),
+(2, 'Listo', '', '', '', ''),
+(4, 'Listo', '', '', '', ''),
+(7, 'Listo', '', '', '', ''),
+(8, 'En proceso', '', '', '', ''),
+(9, 'Listo', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1716,7 +1719,7 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `IDPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IDPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

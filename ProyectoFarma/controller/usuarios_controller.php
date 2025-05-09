@@ -23,6 +23,7 @@ function login(){
      }
     require_once("view/login_view.php");
 }
+/*
 function registro(){
     require_once("model/usuarios_model.php");
     $datos = new Usuarios_model();
@@ -46,5 +47,5 @@ function registro(){
     require_once("view/registro_view.php");
 }
 
-
+*/
 ?>

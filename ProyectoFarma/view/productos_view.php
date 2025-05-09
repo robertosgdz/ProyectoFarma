@@ -1,6 +1,22 @@
 <?php
+
 require_once("menu.php");
-?>
+
+// Si el usuario no ha iniciado sesión, mostrar mensaje de aviso y detener la ejecución
+if (!isset($_SESSION['nombre'])): ?>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
+            <h2 class="text-center mb-3" style="color: #00bcd4;">Bienvenido a PFarma</h2>
+            <p class="text-center mb-4">Para acceder al listado de productos, es necesario iniciar sesión con tu cuenta.</p>
+            <div class="d-flex justify-content-center">
+                <a href="index.php?controlador=usuarios&action=login" class="btn btn-info text-white">
+                    Iniciar sesión
+                </a>
+            </div>
+        </div>
+    </div>
+<?php return; endif; ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +41,7 @@ require_once("menu.php");
     </form>
 </div>
 
+<!-- Tabla de productos -->
 <div class="table-responsive">
 <table class="table table-bordered table-responsive w-100">
     <thead class="table-light">
@@ -50,63 +67,63 @@ require_once("menu.php");
     </thead>
     <tbody>
     <?php
-if (isset($_GET['search']) && !empty($_GET['search'])) {
-    $searchTerm = strtolower($_GET['search']);
-    $searchType = $_GET['search_type'] ?? 'producto';
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $searchTerm = strtolower($_GET['search']);
+        $searchType = $_GET['search_type'] ?? 'producto';
 
-    // Filtrar los productos en base al tipo de búsqueda
-    $productos = array_filter($productos, function($item) use ($searchTerm, $searchType) {
-        switch ($searchType) {
-            case 'producto':
-                return (stripos($item['Nombre'], $searchTerm) !== false) || (strtolower($item['IDProducto']) == $searchTerm);
-            case 'marca':
-                return (stripos($item['NombreMarca'], $searchTerm) !== false) || (strtolower($item['IDMarca']) == $searchTerm);
-            case 'categoria':
-                $categorias = array_map('trim', explode(',', $item['IDCategoria']));
-                return (stripos($item['categorias'], $searchTerm) !== false) || in_array($searchTerm, $categorias);
-            default:
-                return false;
-        }
-    });
-}
+        // Filtrar los productos en base al tipo de búsqueda
+        $productos = array_filter($productos, function($item) use ($searchTerm, $searchType) {
+            switch ($searchType) {
+                case 'producto':
+                    return (stripos($item['Nombre'], $searchTerm) !== false) || (strtolower($item['IDProducto']) == $searchTerm);
+                case 'marca':
+                    return (stripos($item['NombreMarca'], $searchTerm) !== false) || (strtolower($item['IDMarca']) == $searchTerm);
+                case 'categoria':
+                    $categorias = array_map('trim', explode(',', $item['IDCategoria']));
+                    return (stripos($item['categorias'], $searchTerm) !== false) || in_array($searchTerm, $categorias);
+                default:
+                    return false;
+            }
+        });
+    }
 
-foreach ($productos as $item) : ?>
-    <tr>
-        <td><?= htmlspecialchars($item['IDProducto']) ?></td>
-        <td><?= htmlspecialchars($item['Referencia']) ?></td>
-        <td><?= htmlspecialchars($item['Nombre']) ?></td>
-        <td><a href="<?= htmlspecialchars($item['Enlace']) ?>" target="_blank">Ver Producto</a></td>
-        <td><?= htmlspecialchars($item['EAN13']) ?></td>
-        <td><?= htmlspecialchars($item['Resumen']) ?></td>
-        <td><?= number_format($item['PrecioSinImpuestos'], 2) ?> €</td>
-        <td><?= number_format($item['PrecioConImpuestos'], 2) ?> €</td>
-        <td><?= number_format($item['PrecioMayorista'], 2) ?> €</td>
-        <td><?= htmlspecialchars($item['IDFiscal']) ?></td>
-        <td><?= htmlspecialchars($item['categorias']) ?></td>
-        <td><?= htmlspecialchars($item['IDMarca']) ?></td>
-        <td><?= htmlspecialchars($item['Peso']) ?> kg</td>
-        <td><img src="<?= htmlspecialchars($item['URLImagen']) ?>" alt="Imagen del producto" width="50"></td>
-        <?php if (isset($_SESSION['nombre'])): ?>
-    <td>
-        <a href="editar.php?IDProducto=<?= htmlspecialchars($item['IDProducto']) ?>" class="btn btn-sm btn-warning" title="Editar">
-            <i class="bi bi-pencil-square"></i>
-        </a>
-        <form action="index.php" method="POST" style="display: inline;">
-            <input type="hidden" name="action" value="eliminar">
-            <input type="hidden" name="IDProducto" value="<?= htmlspecialchars($item['IDProducto']) ?>">
-            <button class="btn btn-sm btn-danger" type="submit" title="Eliminar">
-                <i class="bi bi-trash"></i>
-            </button>
-        </form>
-    </td>
-<?php endif; ?>
-
-    </tr>
-<?php endforeach; ?>
+    foreach ($productos as $item) : ?>
+        <tr>
+            <td><?= htmlspecialchars($item['IDProducto']) ?></td>
+            <td><?= htmlspecialchars($item['Referencia']) ?></td>
+            <td><?= htmlspecialchars($item['Nombre']) ?></td>
+            <td><a href="<?= htmlspecialchars($item['Enlace']) ?>" target="_blank">Ver Producto</a></td>
+            <td><?= htmlspecialchars($item['EAN13']) ?></td>
+            <td><?= htmlspecialchars($item['Resumen']) ?></td>
+            <td><?= number_format($item['PrecioSinImpuestos'], 2) ?> €</td>
+            <td><?= number_format($item['PrecioConImpuestos'], 2) ?> €</td>
+            <td><?= number_format($item['PrecioMayorista'], 2) ?> €</td>
+            <td><?= htmlspecialchars($item['IDFiscal']) ?></td>
+            <td><?= htmlspecialchars($item['categorias']) ?></td>
+            <td><?= htmlspecialchars($item['IDMarca']) ?></td>
+            <td><?= htmlspecialchars($item['Peso']) ?> kg</td>
+            <td><img src="<?= htmlspecialchars($item['URLImagen']) ?>" alt="Imagen del producto" width="50"></td>
+            <?php if (isset($_SESSION['nombre'])): ?>
+                <td>
+                    <a href="editar.php?IDProducto=<?= htmlspecialchars($item['IDProducto']) ?>" class="btn btn-sm btn-warning" title="Editar">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <form action="index.php" method="POST" style="display: inline;">
+                        <input type="hidden" name="action" value="eliminar">
+                        <input type="hidden" name="IDProducto" value="<?= htmlspecialchars($item['IDProducto']) ?>">
+                        <button class="btn btn-sm btn-danger" type="submit" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
 </div>
 
+<!-- Mensaje informativo tras acciones (insertar/eliminar) -->
 <?php if (isset($_SESSION['message'])): ?>
     <div class="alert alert-info">
         <?= $_SESSION['message']; ?>
